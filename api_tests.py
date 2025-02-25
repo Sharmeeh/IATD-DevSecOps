@@ -1,4 +1,4 @@
-#code
+
 from config import vuln_app
 import os
 
