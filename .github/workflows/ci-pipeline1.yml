@@ -27,9 +27,9 @@ jobs:
           path: junit/test-results.xml
 
   sonarqube:
-    needs: test
-    if: false
+    needs: test    
     runs-on: ubuntu-latest
+    if: false
     steps:
     - uses: actions/checkout@v3
       with:
@@ -80,7 +80,7 @@ jobs:
 
       - uses: azure/login@v1
         with:
-         creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy DAST Container App
         uses: azure/container-apps-deploy-action@v1
@@ -100,14 +100,12 @@ jobs:
           curl https://$FQDN/ui
           sed -i "s,http://localhost:5000,https://$FQDN,g" $GITHUB_WORKSPACE/openapi_specs/openapi3.yml
 
-
-
   build:
-   needs: test
-   permissions:
-    id-token: write    
-   runs-on: ubuntu-latest
-   steps:
+    needs: test
+    permissions:
+     id-token: write    
+    runs-on: ubuntu-latest
+    steps:
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
