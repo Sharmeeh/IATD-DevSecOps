@@ -111,14 +111,14 @@ jobs:
           cmd_options: '-a -c /zap/wrk/.zap/rules.tsv'
           fail_action: false
           allow_issue_writing: false
-          
+          artifact_name: 'zap-report' # Optional By default the action will attach the report to the build with the name zap_scan. Set this to a different string to name it something else. Consult GitHub's documentation for which artifact names are allowed.
       
-      - name: Upload ZAP report
-        id: artifact-zap
-        uses: actions/upload-artifact@v4
-        with:
-          name: zap-report
-          path: report_json.json  
+      # - name: Upload ZAP report
+      #   id: artifact-zap
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: zap-report
+      #     path: report_json.json 
 
 
 
@@ -179,5 +179,5 @@ jobs:
 
        SONAR_RESPONSE=$(curl -X POST -H "Authorization: Bearer $AZURE_ACCESS_TOKEN"  --data-binary @$GITHUB_WORKSPACE/sonarqube-report.json https://devsecops-ver.azurewebsites.net/api/week3-sonar-report)
        echo "Sonar upload: $SONAR_RESPONSE"
-       ZAP_RESPONSE=$(curl -X POST -H "Authorization: Bearer $AZURE_ACCESS_TOKEN"  --data-binary @$GITHUB_WORKSPACE/report_json.json https://devsecops-ver.azurewebsites.net/api/week3-zap-report)
-       echo "Zap upload: $ZAP_RESPONSE"
+      #  ZAP_RESPONSE=$(curl -X POST -H "Authorization: Bearer $AZURE_ACCESS_TOKEN"  --data-binary @$GITHUB_WORKSPACE/report_json.json https://devsecops-ver.azurewebsites.net/api/week3-zap-report)
+      #  echo "Zap upload: $ZAP_RESPONSE"
